@@ -1,26 +1,45 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { Grid } from '@material-ui/core';
+import WeatherSearch from './components/weather/weather-search/WeatherSearch';
+import WeatherToday from './components/weather/weather-today/WeatherToday';
+import WeatherGraph from './components/weather/weather-graph/WeatherGraph';
+import BarChart from './components/weather/weather-graph/BarChart';
+import { useSelector } from 'react-redux';
+import { AppState } from './store';
 
 function App() {
+  
+  const { weatherResults } = useSelector((state:AppState) => state.weathers)
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+      <Grid container justify="center" alignItems="center" spacing={3}>
+
+        <Grid item xs={12}>
+          <WeatherSearch />
+        </Grid>
+
+        { weatherResults.results && <WeatherResultsContainer /> }
+
+      </Grid>
   );
 }
+
+const WeatherResultsContainer = () => (
+  <>
+    <Grid item xs={4}>
+      <WeatherToday />
+    </Grid>
+    <Grid item xs={8}>
+      <WeatherGraph />
+    </Grid>
+    <Grid item xs={12}>
+      <BarChart
+          data={[10, 20, 30]}
+          height={300}
+          width={450}
+        />
+    </Grid>
+  </>
+)
 
 export default App;
