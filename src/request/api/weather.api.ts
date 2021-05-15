@@ -3,7 +3,7 @@ import Api from "./Api";
 
 const getCityByName = async (cityName: string): Promise<WeatherResponse> => {
     
-    const url = `weather?key=${process.env.REACT_APP_KEY_API}&city_name=${cityName}`
+    const url = `weather?format=json-cors&key=${process.env.REACT_APP_KEY_API}&city_name=${cityName}`
 
     const { data } = await Api.get<WeatherResponse>(url)
     
@@ -12,7 +12,7 @@ const getCityByName = async (cityName: string): Promise<WeatherResponse> => {
 
 const getCityByWoeId = async (id: string | undefined): Promise<WeatherResponse> => {
     
-    const url = `weather?woeid=${id}`
+    const url = `weather?format=json-cors&woeid=${id}`
 
     const { data } = await Api.get<WeatherResponse>(url)
     
