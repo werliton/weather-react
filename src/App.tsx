@@ -25,7 +25,7 @@ function App() {
 }
 
 const WeatherResultsContainer = () => (
-  <>
+  <div id="weatherContainer">
     <Grid item xs={4}>
       <WeatherToday />
     </Grid>
@@ -34,12 +34,12 @@ const WeatherResultsContainer = () => (
     </Grid>
     <Grid item xs={12}>
       <BarChart
-          data={[10, 20, 30]}
+          data={[10, 20, 30,10, 20, 30,10, 20, 30,10, 20, 30,10, 20, 30]}
           height={300}
           width={450}
         />
     </Grid>
-  </>
+  </div>
 )
 
 export default App;

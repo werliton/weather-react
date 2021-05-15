@@ -18,6 +18,7 @@ const WeatherSearch: React.FC = () => {
             </div>
             <InputBase
               placeholder="Nome da Cidade"
+              id="inputSearch"
               classes={{
                 root: classes.inputRoot,
                 input: classes.inputInput,

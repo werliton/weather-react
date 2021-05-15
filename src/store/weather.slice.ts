@@ -5,7 +5,7 @@ import { Request } from "./interfaces/IRequest";
 import api from "../request/api/weather.api";
 import CacheService from "../service/cache.service";
 
-interface WeatherState extends Request {
+export interface WeatherState extends Request {
     weatherResults: WeatherResponse
 }
 

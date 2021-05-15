@@ -16,10 +16,10 @@ const BarChart: React.FC<BarChartProps> = ({ data, width, height }) => {
         .attr("width", width)
         .attr("height", height)
 
-    svg.selectAll("text")
+    svg.selectAll("rect")
         .data(data)
         .enter()
-        .append("text")
+        .append("rect")
         .attr("x", (d,i) => i * 70)
         .attr("y", (d,i) => height - 10 * d)
         .attr("width", 65)
@@ -27,7 +27,7 @@ const BarChart: React.FC<BarChartProps> = ({ data, width, height }) => {
         .attr("fill", "blue")
 
     return (
-        <div ref={graphRef}></div>
+        <div ref={graphRef} id="graph"></div>
     )
 }
 

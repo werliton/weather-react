@@ -7,11 +7,11 @@ import Condition from '../../../providers/Condition';
 const WeatherToday: React.FC = () => {
     const classes = useStyles()
     
-    const { isLoading, today } = useWeatherTodayService()
+    const { isLoading, today } = useWeatherTodayService()    
 
     return (
         <Paper elevation={2} className={classes.paper}>
-          {isLoading ? <CircularProgress color="inherit" size={20} /> : <Typography>{today?.city }</Typography>}
+          {isLoading ? <CircularProgress id="loading" color="inherit" size={20} /> : <Typography>{today?.city }</Typography>}
             
           <div className={classes.weather}>
             {isLoading ? <CircularProgress color="inherit" size={20} /> : <Typography variant="h2">{today?.temp} ºC</Typography>}
