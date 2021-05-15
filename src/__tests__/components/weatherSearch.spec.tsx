@@ -48,7 +48,7 @@ describe('Weather Today', () => {
 
         userEvent.click(button)
 
-        expect(mockApi.get).toHaveBeenCalledWith(`weather?woeid=${id}`)
+        expect(mockApi.get).toHaveBeenCalledWith(`weather?format=json-cors&woeid=${id}`)
     })
 
     it('should call fetch by name', () => {
@@ -63,6 +63,6 @@ describe('Weather Today', () => {
 
         userEvent.click(button)
         
-        expect(mockApi.get).toHaveBeenCalledWith(`weather?key=${key}&city_name=${encodeURI(cityName)}`)
+        expect(mockApi.get).toHaveBeenCalledWith(`weather?format=json-cors&key=${key}&city_name=${encodeURI(cityName)}`)
     })
 })
