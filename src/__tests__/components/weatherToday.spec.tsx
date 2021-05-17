@@ -1,13 +1,16 @@
+/* eslint-disable jest/no-mocks-import */
 /* eslint-disable import/first */
 jest.mock('../../request/api/Api')
 
-import { render } from '@testing-library/react'
+import { render, screen } from '@testing-library/react'
 import WeatherToday from '../../components/weather/weather-today/WeatherToday'
 import { Provider } from 'react-redux'
 import { cities } from '../../__mocks__/mockCities'
 import buildStore from '../../__mocks__/buildStore'
+import { WeatherState } from '../../store/weather.slice'
+import { WeatherResponse } from '../../store/interfaces/IWeather'
 
-const setup = (initialState = {}) => {
+const setup = (initialState: WeatherState) => {
 
     let store = buildStore(initialState)
 
@@ -23,9 +26,10 @@ const setup = (initialState = {}) => {
 describe('Weather Today', () => {
         
     it('should render with circular loading', () => {
-        const initialState = {
-            weatherResults: cities, 
+        const initialState: WeatherState = {
+            weatherResults: cities as unknown as WeatherResponse, 
             isLoading: true,
+            error: null
         }
         setup(initialState)
 
@@ -34,14 +38,15 @@ describe('Weather Today', () => {
     })
 
     it('should render city corretly', () => {
-        const initialState = {
-            weatherResults: cities, 
+        const initialState: WeatherState = {
+            weatherResults: cities as unknown as WeatherResponse, 
             isLoading: false,
+            error: null
         }
-        const { getByText } = setup(initialState)
+        setup(initialState)
 
         expect(document.getElementById('loading')).not.toBeInTheDocument()
-        expect(getByText('Sao Jose De Ribamar, MA')).toBeInTheDocument()
+        expect(screen.getByText('Sao Jose De Ribamar, MA')).toBeInTheDocument()
         
     })
 })

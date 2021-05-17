@@ -2,7 +2,7 @@
 jest.mock('../../request/api/Api')
 
 import React from 'react'
-import { render } from '@testing-library/react'
+import { render, screen } from '@testing-library/react'
 import { Provider } from 'react-redux'
 
 import store from '../../store'
@@ -26,10 +26,10 @@ const setup = () => {
 
 describe('Weather Today', () => {
     it('should render input value', () => {
-        const { getByPlaceholderText, getByLabelText } = setup()
+        setup()
         
-        expect(getByPlaceholderText('Nome da Cidade')).toBeInTheDocument()
-        expect(getByLabelText('search')).toBeInTheDocument()
+        expect(screen.getByPlaceholderText('Nome da Cidade')).toBeInTheDocument()
+        expect(screen.getByLabelText('search')).toBeInTheDocument()
 
         userEvent.type(document.getElementById('inputSearch') as TargetElement, 'oi')
 
@@ -38,8 +38,9 @@ describe('Weather Today', () => {
     })
 
     it('should call fetch by id', () => {
-        const { getByRole } = setup()
-        const button = getByRole("button", { name: "Consultar"})
+        setup()
+
+        const button = screen.getByRole("button", { name: "Consultar"})
         const id = '12'
 
         expect(button).toBeInTheDocument()
@@ -52,8 +53,9 @@ describe('Weather Today', () => {
     })
 
     it('should call fetch by name', () => {
-        const { getByRole } = setup()
-        const button = getByRole("button", { name: "Consultar"})
+        setup()
+
+        const button = screen.getByRole("button", { name: "Consultar"})
         const cityName = 'Sao Luis'
         const key = process.env.REACT_APP_KEY_API
 
