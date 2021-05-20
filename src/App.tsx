@@ -10,36 +10,47 @@ import { AppState } from './store';
 function App() {
   
   const { weatherResults } = useSelector((state:AppState) => state.weathers)
-
+    
   return (
       <Grid container justify="center" alignItems="center" spacing={3}>
 
         <Grid item xs={12}>
           <WeatherSearch />
         </Grid>
-
-        { weatherResults.results && <WeatherResultsContainer /> }
+        <Grid item xs={12}>
+          { weatherResults.results && <WeatherResultsContainer /> }
+        </Grid>
 
       </Grid>
   );
 }
+const data = [10, 20, 30,12, 45,36,20]
 
 const WeatherResultsContainer = () => (
-  <div id="weatherContainer">
-    <Grid item xs={4}>
-      <WeatherToday />
-    </Grid>
-    <Grid item xs={8}>
-      <WeatherGraph />
-    </Grid>
-    <Grid item xs={12}>
-      <BarChart
-          data={[10, 20, 30,10, 20, 30,10, 20, 30,10, 20, 30,10, 20, 30]}
-          height={300}
-          width={450}
-        />
-    </Grid>
-  </div>
+  <>
+    <div id="weatherContainer">
+      <Grid container spacing={3}>
+        <Grid item xs={4}>
+          <WeatherToday />
+        </Grid>
+        <Grid item xs={8}>
+          <WeatherGraph />
+        </Grid>
+      </Grid>
+    </div>
+
+    <div id="weatherGraph">
+      <Grid container spacing={3}>
+        <Grid item xs={12}>
+          <BarChart
+              data={data}
+              height={300}
+              width={450}
+            />
+        </Grid>
+      </Grid>
+    </div>
+  </>
 )
 
 export default App;
