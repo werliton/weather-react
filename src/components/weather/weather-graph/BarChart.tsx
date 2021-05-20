@@ -20,8 +20,8 @@ const BarChart: React.FC<BarChartProps> = ({ data }) => {
     const graphRef = useRef(null)
 
     const svgHeight=  300
-    const svgWidth = 450
-    const barWidth = (svgWidth / data.length)
+    const svgWidth = 600
+    const barWidth = Math.round(svgWidth / data.length)
     const barPadding = 10
 
     useEffect(() => {
@@ -29,23 +29,30 @@ const BarChart: React.FC<BarChartProps> = ({ data }) => {
             .select(graphRef.current)
             .attr("width", svgWidth)
             .attr("height", svgHeight)
-            .style('padding', 10)
-            .style('background-color', '#c7b7b7')
+            .style('background-color', '#e2d0d0')
 
         svg.selectAll("rect")
             .data(data)
             .enter()
             .append("rect")
-            .attr("x", (d,i) => i * 70)
-            .attr("y", (d) => svgHeight - d)
-            .style('padding', 10)
-            .attr("width", barWidth - barPadding)
+            .attr("x", (d,i) => i * 65)
+            .attr("y", (d) => svgHeight - d * 5)
+            .attr("width", barWidth/2)
             .attr("height", (d, i) => d * 10)
             .attr("transform", (d, i) => {
                 const translate = [barWidth * 1, 0]
                 return `translate(${translate})`
             })
             .attr("fill",'#5288AC')
+
+        svg.selectAll("text")
+            .data(data)
+            .enter()
+            .append("text")
+            .text(d => `${d}º`)
+            .attr("x", (d, i) => i * 65 + (barWidth + 10))
+            .attr("y", (d, i) => (svgHeight - d * 5) - 5)
+            
     }, [data, barWidth])
 
     return (
