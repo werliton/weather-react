@@ -28,8 +28,7 @@ const BarChart: React.FC<BarChartProps> = ({ data }) => {
     const barWidth = Math.round(svgWidth / data.length)
 
     useEffect(() => {
-        const forecast = weatherResults?.results?.forecast
-      
+        const forecast = weatherResults?.results?.forecast     
 
         const svg = d3
             .select(graphRef.current)
