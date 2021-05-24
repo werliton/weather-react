@@ -29,15 +29,36 @@ const BarChart: React.FC<BarChartProps> = ({ data }) => {
 
     useEffect(() => {
         const forecast = weatherResults?.results?.forecast
+      
+
         const svg = d3
             .select(graphRef.current)
             .attr("width", svgWidth)
             .attr("height", svgHeight)
             .style('background-color', '#e2d0d0')
+
+        const xScale = d3.scaleLinear()
+            .domain([0, d3.max(forecast.map(item => item.max)) as number])
+            .range([0, svgWidth])
         
         const yScale = d3.scaleLinear()
         .domain([0, d3.max(forecast.map(item => item.max)) as number])
         .range([0, svgHeight])
+
+        // const x_axis = d3.axisBottom(xScale)
+
+        // const y_axis = d3.axisLeft(yScale)
+
+        // svg.append("g")
+        //     .attr("transform", "translate(50, 10)")
+        //     .call(y_axis)
+
+        // const xAxisTranslate = svgHeight - 20
+        
+        // svg.append("g")
+        // .attr("transform", `translate(50, ${xAxisTranslate})`)
+        // .call(x_axis)
+
         // render rectangle
         svg.selectAll("rect")
             .data(forecast)
